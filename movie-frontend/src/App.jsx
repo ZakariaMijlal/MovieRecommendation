@@ -6,26 +6,25 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  // On stocke l'utilisateur connecté ici (State global simple)
   const [user, setUser] = useState(null);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        
-        {/* On passe la fonction setUser au Login pour qu'il puisse enregistrer l'utilisateur */}
-        <Route path="/login" element={<Login setUser={setUser} />} />
-        
-        <Route path="/register" element={<Register />} />
-        
-        {/* On protège la route Dashboard : si pas de user, on redirige vers login */}
-        <Route 
-          path="/dashboard" 
-          element={user ? <Dashboard user={user} /> : <Navigate to="/login" />} 
-        />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+
+          {/* On passe setUser au Login */}
+          <Route path="/login" element={<Login setUser={setUser} />} />
+
+          <Route path="/register" element={<Register />} />
+
+          {/* CORRECTION ICI : On ajoute setUser={setUser} dans les props du Dashboard */}
+          <Route
+              path="/dashboard"
+              element={user ? <Dashboard user={user} setUser={setUser} /> : <Navigate to="/login" />}
+          />
+        </Routes>
+      </Router>
   );
 }
 

@@ -24,7 +24,7 @@ public class RecommendationController {
     private MovieClient movieClient;
 
     @GetMapping("/recommend/{userId}")
-    @CrossOrigin(origins = "*")
+
     public Map<String, Object> recommendMovies(@PathVariable Long userId) {
         Map<String, Object> result = new HashMap<>();
 

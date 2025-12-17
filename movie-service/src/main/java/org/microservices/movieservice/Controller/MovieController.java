@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins="*")
 @RequestMapping("/movies")
 public class MovieController {
     @Autowired

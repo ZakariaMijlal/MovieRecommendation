@@ -11,13 +11,13 @@ function Register() {
     const favoritesArray = formData.favorites.split(',').map(s => s.trim());
 
     try {
-      await axios.post('http://localhost:8081/users', {
+      await axios.post('http://localhost:8080/user-service/users', {
         name: formData.name,
         email: formData.email,
         password: formData.password,
         favorites: favoritesArray
       });
-      alert("Compte créé ! Connectez-vous.");
+      alert("Compte créé !");
       navigate('/login');
     } catch (err) {
       alert("Erreur lors de la création.");
@@ -25,21 +25,17 @@ function Register() {
   };
 
   return (
-    // 👇 Ajout de "center-screen" ici aussi
-    <div className="app-container center-screen">
-      <h1 style={{ marginBottom: '20px' }}>🎬 Rejoignez-nous</h1>
-      <h2>Créer un compte</h2>
-      
-      <form onSubmit={handleSubmit} className="auth-form">
-        <input type="text" placeholder="Nom" onChange={e => setFormData({...formData, name: e.target.value})} required />
-        <input type="email" placeholder="Email" onChange={e => setFormData({...formData, email: e.target.value})} required />
-        <input type="password" placeholder="Mot de passe" onChange={e => setFormData({...formData, password: e.target.value})} required />
-        <input type="text" placeholder="Genres favoris (ex: Batman, Shrek)" onChange={e => setFormData({...formData, favorites: e.target.value})} required />
-        <button type="submit">S'inscrire</button>
-      </form>
-      
-      <p>Déjà un compte ? <Link to="/login">Se connecter</Link></p>
-    </div>
+      <div className="app-container center-screen">
+        <h2>Créer un compte</h2>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <input type="text" placeholder="Nom" onChange={e => setFormData({...formData, name: e.target.value})} required />
+          <input type="email" placeholder="Email" onChange={e => setFormData({...formData, email: e.target.value})} required />
+          <input type="password" placeholder="Mot de passe" onChange={e => setFormData({...formData, password: e.target.value})} required />
+          <input type="text" placeholder="Favoris (ex: Inception, Toy Story)" onChange={e => setFormData({...formData, favorites: e.target.value})} required />
+          <button type="submit">S'inscrire</button>
+        </form>
+        <Link to="/login">Retour</Link>
+      </div>
   );
 }
 

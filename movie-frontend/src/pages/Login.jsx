@@ -10,7 +10,8 @@ function Login({ setUser }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get(`http://localhost:8081/users/search/findByEmail?email=${email}`);
+      // Appel via Gateway (8080) + Préfixe du service (/user-service)
+      const res = await axios.get(`http://localhost:8080/user-service/users/search/findByEmail?email=${email}`);
       const userData = res.data;
 
       if (userData && userData.password === password) {
@@ -19,28 +20,23 @@ function Login({ setUser }) {
         setUser({ ...userData, id: id });
         navigate('/dashboard');
       } else {
-        alert("Mauvais mot de passe");
+        alert("Identifiants incorrects");
       }
     } catch (err) {
-      alert("Utilisateur non trouvé");
+      alert("Erreur : Vérifiez que la Gateway et Eureka sont lancés.");
     }
   };
 
   return (
-    // 👇 C'est ici que la magie opère : "center-screen"
-    <div className="app-container center-screen">
-      <h1 style={{ marginBottom: '20px' }}>🎬 Movie App</h1>
-      <h2>Connexion</h2>
-      
-      <form onSubmit={handleLogin} className="auth-form">
-        <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Mot de passe" onChange={e => setPassword(e.target.value)} required />
-        <button type="submit">Se connecter</button>
-      </form>
-      
-      <p>Pas de compte ? <Link to="/register">Créer un compte</Link></p>
-    </div>
+      <div className="center-screen">
+        <h2>Connexion</h2>
+        <form onSubmit={handleLogin} className="auth-form">
+          <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} required />
+          <input type="password" placeholder="Mot de passe" onChange={e => setPassword(e.target.value)} required />
+          <button type="submit">Entrer</button>
+        </form>
+        <p>Pas de compte ? <Link to="/register">S'inscrire</Link></p>
+      </div>
   );
 }
-
 export default Login;

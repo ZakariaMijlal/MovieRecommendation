@@ -9,6 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="movie-service" />
         <module name="user-service" />
+        <module name="discovery-service" />
+        <module name="gateway-service" />
       </profile>
       <profile name="Annotation profile for Recommandation-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -20,10 +22,16 @@
         <module name="recommandation-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="movie-service (1)" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="discovery-service" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
       <module name="movie-service" options="-parameters" />
+      <module name="movie-service (1)" options="-parameters" />
       <module name="recommandation-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>

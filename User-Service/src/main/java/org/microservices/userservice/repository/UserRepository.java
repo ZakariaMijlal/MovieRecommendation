@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @RepositoryRestResource
-@CrossOrigin(origins = "*") // Important pour que React puisse appeler
+
 public interface UserRepository extends JpaRepository<User, Long> {
 
     // Cela expose automatiquement : /users/search/findByEmail?email=...
